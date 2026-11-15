@@ -1,5 +1,6 @@
 # 2026.10.1
 
+* Use browser-only printer connections and downloads; remove the Capacitor native bridge.
 * Fix label options not open on disconnected printer
 
 # 2026.10.0

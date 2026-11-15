@@ -36,11 +36,6 @@ export default defineConfig({
           if (id.includes("node_modules")) {
             if (id.includes("fabric")) {
               return "lib.2.fabric";
-            } else if (
-              id.includes("@capacitor/filesystem") ||
-              id.includes("@capacitor/share")
-            ) {
-              return "lib.2.cap";
             } else if (id.includes("zod")) {
               return "lib.2.zod";
             } else if (id.includes("@mmote/niimbluelib")) {

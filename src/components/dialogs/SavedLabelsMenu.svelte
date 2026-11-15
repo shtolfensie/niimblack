@@ -8,7 +8,6 @@
   import { Toasts } from "$/utils/toasts";
   import { FileUtils } from "$/utils/file_utils";
   import * as fabric from "fabric";
-  import { Utils } from "@mmote/niimbluelib";
   import { z } from "zod";
   import AppModal from "$/components/basic/AppModal.svelte";
   import { appConfirm } from "$/stores/confirm";
@@ -32,7 +31,6 @@
   let title = $state<string>("");
   let usedSpace = $state<number>(0);
   let customDefaultTemplate = $state<boolean>(LocalStoragePersistence.hasCustomDefaultTemplate());
-  let isStandalone = Utils.getAvailableTransports().capacitorBle;
   let modalRef: AppModal;
   let sortMode = $derived($appConfig.savedLabelsSortMode ?? "date_asc");
 
@@ -346,13 +344,11 @@
             {$tr("params.saved_labels.export.png")}
           </button>
         </li>
-        {#if !isStandalone}
-          <li>
-            <button class="dropdown-item" onclick={onExportUrlClicked}>
-              {$tr("params.saved_labels.save.url")}
-            </button>
-          </li>
-        {/if}
+        <li>
+          <button class="dropdown-item" onclick={onExportUrlClicked}>
+            {$tr("params.saved_labels.save.url")}
+          </button>
+        </li>
         <li><hr class="dropdown-divider" /></li>
         <li><h6 class="dropdown-header">{$tr("params.saved_labels.export.all")}</h6></li>
         <li>

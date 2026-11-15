@@ -11,7 +11,6 @@ import {
 import { OBJECT_DEFAULTS, OBJECT_DEFAULTS_VECTOR, THUMBNAIL_HEIGHT, THUMBNAIL_QUALITY } from "$/defaults";
 import { z } from "zod";
 import { CustomCanvas } from "$/fabric-object/custom_canvas";
-import { Capacitor } from "@capacitor/core";
 import { CanvasUtils } from "$/utils/canvas_utils";
 import { LocalStoragePersistence } from "./persistence";
 import { csvData, loadedFonts } from "$/stores/app";
@@ -136,30 +135,8 @@ export class FileUtils {
     }, 10_000);
   }
 
-  static async downloadBase64Capacitor(filename: string, base64Data: string) {
-    const { Directory, Filesystem } = await import("@capacitor/filesystem");
-    const { Share } = await import("@capacitor/share");
-
-    const result = await Filesystem.writeFile({
-      data: base64Data,
-      path: filename,
-      directory: Directory.Cache,
-    });
-
-    await Share.share({
-      title: filename,
-      text: filename,
-      url: result.uri,
-    });
-  }
-
   static async downloadBase64(filename: string, mime: string, base64Data: string) {
-    if (Capacitor.getPlatform() !== "web") {
-      FileUtils.downloadBase64Capacitor(filename, base64Data);
-      return;
-    }
-
-    FileUtils.downloadBase64Web(filename, mime, base64Data);
+    return FileUtils.downloadBase64Web(filename, mime, base64Data);
   }
 
   static makeExportedLabel(canvas: fabric.Canvas, labelProps: LabelProps, includeCsv: boolean): ExportedLabelTemplate {

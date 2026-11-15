@@ -8,3 +8,7 @@
 !/vite.config.ts
 !/package.json
 !/package-lock.json
+!/lib
+/lib/node_modules
+/lib/dist
+/lib/.git

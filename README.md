@@ -1,3 +1,28 @@
+# NiimBlue — browser-only fork
+
+This fork removes Capacitor and its native Bluetooth, filesystem, and sharing integrations while retaining Web Bluetooth, Web Serial, label editing, file imports, and JSON, PNG, and URL exports.
+
+The app uses the local `lib/` submodule instead of the published library. Docker builds the library before the app. The virtual client and UMD build tooling are retained.
+
+## Build this fork
+
+From the repository directory:
+
+```bash
+git submodule update --init --recursive
+npm --prefix lib ci --include=dev
+npm --prefix lib run clean-build
+npm ci --include=dev
+npm run sv-check
+npm run build
+```
+
+Use `npm run dev` for development. Production files are generated in `dist/`.
+
+---
+
+## Original upstream README
+
 <div align="center">
 
 [![logo](about/logo.svg)](https://niim.blue)

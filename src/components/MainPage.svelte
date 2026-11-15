@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { Utils } from "@mmote/niimbluelib";
   import BrowserWarning from "$/components/basic/BrowserWarning.svelte";
   import LabelDesigner from "$/components/LabelDesigner.svelte";
   import PrinterConnector from "$/components/PrinterConnector.svelte";
@@ -16,8 +15,6 @@
   // eslint-disable-next-line no-undef
   const buildDate = __BUILD_DATE__;
 
-  let isStandalone = Utils.getAvailableTransports().capacitorBle || "__TAURI__" in window;
-
   let debugStuffShow = $state<boolean>(false);
 </script>
 
@@ -26,7 +23,7 @@
     <div class="row align-items-center mb-3">
       <div class="col">
         <h1 class="title">
-          <span class="niim">Niim</span><span class="blue">Blue{isStandalone ? "s" : ""}</span>
+          <span class="niim">Niim</span><span class="blue">Blue</span>
         </h1>
       </div>
       <div class="col-md-3">

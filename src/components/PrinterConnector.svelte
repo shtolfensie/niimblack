@@ -2,7 +2,6 @@
   import {
   AutoShutdownTime,
     LabelType,
-    NiimbotCapacitorBleClient,
     ResolutionClass,
     SoundSettingsItemType,
     Utils,
@@ -17,7 +16,6 @@
     printerInfo,
     printerMeta,
     heartbeatFails,
-    automation,
     rfidInfo,
     dimensionsUpdateRequest,
   } from "$/stores/app";
@@ -32,7 +30,7 @@
   import PrinterVerboseInfo from "$/components/dialogs/PrinterVerboseInfo.svelte";
 
   let connectionType = $state<ConnectionType>("bluetooth");
-  let featureSupport = $state<AvailableTransports>({ webBluetooth: false, webSerial: false, capacitorBle: false });
+  let featureSupport = $state<AvailableTransports>({ webBluetooth: false, webSerial: false });
   let verboseInfoShow = $state<boolean>(false);
 
   const percentage = (cur?: number, total?: number) => {
@@ -48,11 +46,7 @@
     connectionState.set("connecting");
 
     try {
-      if ($printerClient instanceof NiimbotCapacitorBleClient && $automation?.autoConnectDeviceId !== undefined) {
-        await $printerClient.connect({ deviceId: $automation.autoConnectDeviceId });
-      } else {
-        await $printerClient.connect();
-      }
+      await $printerClient.connect();
     } catch (e) {
       connectionState.set("disconnected");
       Toasts.error(e);
@@ -117,18 +111,8 @@
 
     connectionType = LocalStoragePersistence.loadLastConnectionType() ?? "bluetooth";
 
-    if (!featureSupport.capacitorBle && connectionType === "capacitor-ble") {
-      connectionType = "bluetooth";
-    }
     if (!featureSupport.webSerial && connectionType === "serial") {
       connectionType = "bluetooth";
-    }
-    if (!featureSupport.webBluetooth && connectionType === "bluetooth" && featureSupport.capacitorBle) {
-      connectionType = "capacitor-ble";
-    }
-
-    if ($automation !== undefined && $automation.autoConnect && connectionType === "capacitor-ble") {
-      onConnectClicked();
     }
   });
 </script>
@@ -325,22 +309,13 @@
         {$tr("connector.serial")}
       </button>
     {/if}
-    {#if featureSupport.capacitorBle}
-      <button
-        disabled={$connectionState === "connecting"}
-        class="btn text-nowrap {connectionType === 'capacitor-ble' ? 'btn-light' : 'btn-outline-secondary'}"
-        onclick={() => switchConnectionType((connectionType = "capacitor-ble"))}>
-        <MdIcon icon="usb" />
-        Capacitor BLE
-      </button>
-    {/if}
   {/if}
 
   {#if $connectionState !== "connected"}
     <button
       class="btn btn-primary"
       disabled={$connectionState === "connecting" ||
-        (!featureSupport.capacitorBle && !featureSupport.webBluetooth && !featureSupport.webSerial)}
+        (!featureSupport.webBluetooth && !featureSupport.webSerial)}
       onclick={onConnectClicked}>
       <MdIcon icon="power" />
     </button>

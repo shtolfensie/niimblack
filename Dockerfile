@@ -3,8 +3,9 @@ FROM node:25-alpine AS builder
 WORKDIR /app
 
 COPY package.json package-lock.json ./
+COPY lib/ ./lib/
 
-RUN npm ci
+RUN npm --prefix lib ci && npm --prefix lib run clean-build && npm ci
 
 COPY . .
 
