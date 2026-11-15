@@ -23,7 +23,7 @@
     <div class="row align-items-center mb-3">
       <div class="col">
         <h1 class="title">
-          <span class="niim">Niim</span><span class="blue">Blue</span>
+          <span class="niim">Niim</span><span class="blue">Black</span>
         </h1>
       </div>
       <div class="col-md-3">
@@ -53,11 +53,11 @@
     </div>
     <div>
       {#if appVersion}
-        <a class="text-secondary" href="https://github.com/MultiMote/niimblue/releases/tag/{appVersion}">
+        <a class="text-secondary" href="https://github.com/shtolfensie/niimblack/releases/tag/{appVersion}">
           {appVersion}
         </a>
       {:else if appCommit}
-        <a class="text-secondary" href="https://github.com/MultiMote/niimblue/commit/{appCommit}">
+        <a class="text-secondary" href="https://github.com/shtolfensie/niimblack/commit/{appCommit}">
           {appCommit.slice(0, 6)}
         </a>
       {/if}
@@ -65,7 +65,7 @@
       {buildDate}
     </div>
     <div>
-      <a class="text-secondary" href="https://github.com/MultiMote/niimblue">{$tr("main.code")}</a>
+      <a class="text-secondary" href="https://github.com/shtolfensie/niimblack">{$tr("main.code")}</a>
       <button class="text-secondary btn btn-link p-0" onclick={() => debugStuffShow = true}>
         <MdIcon icon="bug_report" />
       </button>
