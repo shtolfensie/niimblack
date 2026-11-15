@@ -19,6 +19,14 @@ npm run build
 
 Use `npm run dev` for development. Production files are generated in `dist/`.
 
+## GitHub Pages
+
+In repository **Settings → Pages**, select **GitHub Actions** as the build source. Push to `main` or manually run **Deploy GitHub Pages** to deploy to https://shtolfensie.github.io/niimblack/.
+
+The workflow checks out the library submodule, runs its tests, builds the app with relative asset paths, and publishes `dist/`. Push library commits before updating the main repository's submodule reference. The submodule must be publicly accessible to the default workflow.
+
+GitHub Free requires the Pages repository to be public. A custom domain can be configured later in Pages settings without changing the relative build base.
+
 ---
 
 ## Original upstream README

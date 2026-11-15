@@ -386,7 +386,10 @@ export class FileUtils {
 
     const compressed = await FileUtils.compressData(data);
     const b64data = await FileUtils.base64buf(compressed);
-    return `${location.protocol}//${location.host}/#load=${b64data}`;
+    const url = new URL(location.href);
+    url.search = "";
+    url.hash = `load=${b64data}`;
+    return url.href;
   }
 
   static urlHashParamsToDict(): Record<string, string> {
