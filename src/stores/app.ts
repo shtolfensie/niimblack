@@ -25,11 +25,11 @@ import {
   createPrinterInfo,
 } from "@mmote/niimbluelib";
 import { LocalStoragePersistence, writablePersisted } from "$/utils/persistence";
-import { APP_CONFIG_DEFAULTS, CSV_DEFAULT, OBJECT_DEFAULTS_TEXT } from "$/defaults";
+import { APP_CONFIG_DEFAULTS, BUNDLED_FONT_FAMILIES, CSV_DEFAULT } from "$/defaults";
 import z from "zod";
 import { FileUtils } from "$/utils/file_utils";
 
-export const fontCache = writable<string[]>([OBJECT_DEFAULTS_TEXT.fontFamily]);
+export const fontCache = writable<string[]>(BUNDLED_FONT_FAMILIES);
 export const appConfig = writablePersisted<AppConfig>("config", AppConfigSchema, APP_CONFIG_DEFAULTS);
 export const userIcons = writablePersisted<UserIcon[]>("user_icons", z.array(UserIconSchema), []);
 export const userFonts = writablePersisted<UserFont[]>("user_fonts", z.array(UserFontSchema), []);

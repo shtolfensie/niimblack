@@ -105,6 +105,9 @@ export const OBJECT_DEFAULTS_TEXT = {
   lineHeight: 1,
 } as fabric.TextboxProps;
 
+/** Font families bundled with the app and available without local font access. */
+export const BUNDLED_FONT_FAMILIES = [OBJECT_DEFAULTS_TEXT.fontFamily, "JetBrains Mono"];
+
 /** Scale image to this height when making a label thumbnail */
 export const THUMBNAIL_HEIGHT = 48;
 

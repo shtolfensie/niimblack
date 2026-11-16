@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { OBJECT_DEFAULTS_TEXT } from "$/defaults";
+  import { BUNDLED_FONT_FAMILIES } from "$/defaults";
   import { tr } from "$/utils/i18n";
   import { Toasts } from "$/utils/toasts";
   import MdIcon from "$/components/basic/MdIcon.svelte";
@@ -30,7 +30,7 @@
   const getSystemFonts = async () => {
     try {
       const fonts = await queryLocalFonts();
-      const fontListSorted = [OBJECT_DEFAULTS_TEXT.fontFamily, ...new Set(fonts.map((f: FontData) => f.family))].sort();
+      const fontListSorted = [...new Set([...BUNDLED_FONT_FAMILIES, ...fonts.map((f: FontData) => f.family)])].sort();
       fontCache.update(() => fontListSorted);
       LocalStoragePersistence.saveCachedFonts(fontListSorted);
     } catch (e) {
@@ -47,7 +47,7 @@
     try {
       let stored = LocalStoragePersistence.loadCachedFonts();
       if (stored.length > 0) {
-        const uniqueFonts = new Set([OBJECT_DEFAULTS_TEXT.fontFamily, ...stored]);
+        const uniqueFonts = new Set([...BUNDLED_FONT_FAMILIES, ...stored]);
         fontCache.update(() => [...uniqueFonts].sort());
       }
     } catch (e) {

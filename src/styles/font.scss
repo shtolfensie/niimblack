@@ -28,3 +28,12 @@
   font-weight: 400;
   src: url(material-icons/iconfont/material-icons.woff2) format("woff2");
 }
+
+/* jetbrains-mono-medium */
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url("$/assets/fonts/JetBrainsMono-Medium.ttf") format("truetype");
+}
